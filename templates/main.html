@@ -1,0 +1,9 @@
+<h1>Welcome to Wave CMS by Agencys v1!</h1>
+
+<p>This is the home page.</p><br><br>
+
+<h2>Articles</h2>
+<div class="well" ng-repeat="article in articles" style="cursor:pointer" ng-click="$state.go('article',{id:article.id});">
+<h3>{{article.title}} <small>{{ article.date*1000 | date:'dd/MM/yyyy  HH:mm' }}</small></h3>
+<div ng-bind-html="article.content"></div><br>
+</div>

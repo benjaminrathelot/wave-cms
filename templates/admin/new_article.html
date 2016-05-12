@@ -1,0 +1,12 @@
+<h1>New Article — {{article.title}}</h1>
+
+<div class="row">
+	<div class="col-md-11">
+		<input type="text" class="form-control" ng-model="article.title" placeholder="Title"/>
+	</div>
+	<div class="col-md-1">
+		<button class="btn btn-primary" ng-click="edit()">Publish</button>
+	</div>
+</div><br />
+<br />
+<div id="summernote" ng-bind-html-unsafe></div><br />

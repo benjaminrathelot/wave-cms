@@ -1,0 +1,13 @@
+<h1>Wave Newsletter <small>v1.0.0</small></h1>
+
+<div class="well" style="height:200px;overflow:scroll">
+<h4>Utilisateurs inscrits</h4>
+<p>Nom Prénom : e-mail</p><br />
+<p ng-repeat="data in datas">{{data.name}} {{data.surname}} : {{data.email}}</p>
+</div>
+
+<h3>Nouvelle newsletter</h3>
+
+
+<div id="summernote" ng-bind-html-unsafe></div><br />
+<center><button class="btn btn-primary" ng-click="send()">Envoyer aux abonnés</button></center>

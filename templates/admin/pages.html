@@ -1,0 +1,21 @@
+<h1>Pages</h1>
+<center>
+	<button ng-click="$state.go('new_page');" class="btn btn-primary">Nouvelle Page</button>
+</center><br />
+<div class="well container-fluid" ng-repeat="page in pages">
+<div class="row">
+<div class="col-md-8">
+	<h3>{{page.id}}</h3>
+	<br />
+</div>
+<div class="col-md-1"><br /><br /><br />
+<button class="btn btn-primary" ng-click="$state.go('page',{id:page.id});">Edit</button> 
+</div>
+<div class="col-md-1"><br /><br /><br />
+<a class="btn btn-primary" href="index.php#/{{page.id}}" target="_blank">View</a> 
+</div>
+<div class="col-md-2"><br /><br /><br />
+<a class="btn btn-warning" ng-click="delete(page.id)">Remove</a> 
+</div>
+</div>
+</div>

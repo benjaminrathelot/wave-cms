@@ -1,0 +1,21 @@
+<h1>Articles</h1>
+<center>
+	<button ng-click="$state.go('new_article');" class="btn btn-primary">Nouvel Article</button>
+</center><br />
+<div class="well container-fluid" ng-repeat="article in articles">
+<div class="row">
+<div class="col-md-8">
+	<h3>{{article.title}} <small>{{ article.date*1000 | date:'dd/MM/yyyy HH:mm' }}</small></h3>
+	<div ng-bind-html="article.content"></div><br />
+</div>
+<div class="col-md-1"><br /><br /><br />
+<button class="btn btn-primary" ng-click="$state.go('article',{id:article.id});">Edit</button>
+</div>
+<div class="col-md-1"><br /><br /><br />
+<a class="btn btn-primary" href="index.php#/article/{{article.id}}" target="_blank">View</a>
+</div>
+<div class="col-md-2"><br /><br /><br />
+<a class="btn btn-warning" ng-click="delete(article.id)">Remove</a>
+</div>
+</div>
+</div>

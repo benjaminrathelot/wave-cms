@@ -1,0 +1,165 @@
+<br /><ul class="nav nav-tabs">
+  <li role="presentation" ng-class="{active: $stateParams.cat=='main'}"><a ui-sref="params({cat:'main'})">General</a></li>
+  <li role="presentation" ng-class="{active: $stateParams.cat=='user'}"><a ui-sref="params({cat:'user'})">Users</a></li>
+  <li role="presentation" ng-class="{active: $stateParams.cat=='top-menu'}"><a ui-sref="params({cat:'top-menu'})">Main menu</a></li>
+  <li role="presentation" ng-class="{active: $stateParams.cat=='router'}"><a ui-sref="params({cat:'router'})">Routes</a></li>
+  <li role="presentation" ng-class="{active: $stateParams.cat=='plugin'}"><a ui-sref="params({cat:'plugin'})">Plugins</a></li>
+</ul>
+<div id="main-tab" class="hid" ng-class="{ok: $stateParams.cat=='main'}">
+<h1>General</h1>
+<br />
+
+<form class="form-horizontal">
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Site Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="site.name">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Site Subname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="site.subname">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="site.description">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Keywords</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="site.keywords">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button class="btn btn-default" ng-click="update()">Update</button>
+    </div>
+  </div>
+</form>
+<br />
+</div>
+<div id="user-tab" class="hid" ng-class="{ok: $stateParams.cat=='user'}">
+<h1>Users</h1><br />
+	<p>
+		An username starting with "--" can only view and edit pages/articles. An username starting with "-" has administration rights. 
+	</p><br />
+	<center>
+		<button ng-click="$state.go('new_user');" class="btn btn-primary">New User</button>
+	</center><br />
+	<div class="well container-fluid" ng-repeat="(user,pass) in users">
+	<div class="row">
+	<div class="col-md-9">
+		<h3>{{user}}</h3>
+		<br />
+	</div>
+	<div class="col-md-1"><br />
+	<a class="btn btn-warning" ng-click="delete(user)">Remove</a>
+	</div>
+	</div>
+	</div>
+</div>
+<div id="top-menu-tab" class="hid"  ng-class="{ok: $stateParams.cat=='top-menu'}">
+	<h1>Main Menu</h1>
+
+	<div class="well container-fluid">
+	<div class="row">
+	<div class="col-md-9">
+		<h3>New</h3>
+		<br />
+		Title <input type="text" class="form-control" ng-model="new_menu_title" /><br />
+		URL <input type="text" class="form-control" ng-model="new_menu_state" />
+
+	</div>
+	<div class="col-md-1"><br /><br /><br /><br />
+	<button class="btn btn-primary" ng-click="addmenu()">Add</button>
+	</div>
+	</div>
+	</div>	
+
+<ul class="nav nav-pills">
+  <li role="presentation" ng-repeat="(state, title) in main_menu"><a ng-click="scrollTo(state+'TopMenu')" style="cursor:pointer">{{title}}</a></li>
+</ul>
+
+	<div class="container-fluid" ng-repeat="(state,title) in main_menu" ng-init="old_state=state;old_title=title" id="{{state}}TopMenu">
+	<div class="row"><hr>
+	<div class="col-md-9">
+		<h3>{{title}} : {{state}}</h3>
+		<br />
+		Title <input type="text" class="form-control" ng-model="title" /><br />
+		URL ({{old_state}})<input type="text" class="form-control" ng-model="state" />
+
+	</div>
+	<div class="col-md-1"><br />
+	<a class="btn btn-warning" ng-click="delmenu(state)">Remove</a>
+	</div>
+	<div class="col-md-1"><br />
+	<button class="btn btn-primary" style="margin-left:10px" ng-click="editmenu(old_state,state,old_title,title)">Edit</button>
+	</div>
+	</div><br />
+	</div>	
+</div>
+<div id="router-tab" class="hid"  ng-class="{ok: $stateParams.cat=='router'}">
+	<h1>Routes</h1>
+
+	<div class="well container-fluid">
+	<div class="row">
+	<div class="col-md-9">
+		<h3>New</h3>
+		<br />
+		TemplateURL <input type="text" class="form-control" ng-model="new_route.templateUrl" placeholder="templates/example.html"/><br />
+		Controller <input type="text" class="form-control" ng-model="new_route.controller" placeholder="DefaultCtrl"/><br />
+		URL <input type="text" class="form-control" ng-model="new_route.url" placeholder="/example"/><br />
+		ID <input type="text" class="form-control" ng-model="new_route_id" placeholder="example"/>
+
+	</div>
+	<div class="col-md-1"><br />
+	<button class="btn btn-primary" ng-click="addroute()">Add</button>
+	</div>
+	</div>
+	</div>
+<ul class="nav nav-pills">
+  <li role="presentation" ng-repeat="(id, route) in routes"><a ng-click="scrollTo(id+'Route')" style="cursor:pointer">{{route.url}}</a></li>
+</ul>
+	<div class="container-fluid" ng-repeat="(id,route) in routes" ng-init="old=id" id="{{id}}Route">
+	<hr>
+	<div class="row">
+	<div class="col-md-9">
+		<h3>{{id}} : {{route.templateUrl}} [{{route.controller}}]</h3>
+		<br />
+		TemplateURL <input type="text" class="form-control" ng-model="route.templateUrl" /><br />
+		Controller <input type="text" class="form-control" ng-model="route.controller" /><br />
+		URL <input type="text" class="form-control" ng-model="route.url" /><br />
+		ID ({{id}}) <input type="text" class="form-control" ng-model="id" />
+
+	</div>
+	<div class="col-md-1"><br /> 
+	<a class="btn btn-warning" ng-click="delroute(id)">Remove</a>
+	</div>
+	<div class="col-md-2"><br /> 
+	<button class="btn btn-primary" style="margin-left:10px" ng-click="editroute(old, id, route.templateUrl, route.controller, route.url)">Update</button>
+	</div>
+	</div><br />
+	</div>
+</div>
+
+<div id="main-tab" class="hid" ng-class="{ok: $stateParams.cat=='plugin'}">
+<h1>Plugins</h1>
+<br />
+	<div class="container-fluid well" ng-repeat="plugin in plugins">
+<div class="row">
+	<div class="col-md-8">
+		<h3>{{plugin.name}} <small>v{{plugin.version}} by <a href="{{plugin.url}}" target="_blank">{{plugin.author}}</a></small></h3>
+		<p>{{plugin.description}}</p>
+		</div>
+</div>
+</div>
+</div>
