@@ -1,5 +1,5 @@
 # wave-cms
-Wave CMS is a minimalistic open-source Content Management System based on AngularJS and PHP. It implements some default fonctionnalities: an administration interface to edit site settings, create pages and articles, manage users and 2 working plugins (contact form and social icons). As you might have guessed, this is not an achieved project but it can already be used and improved by developers thanks to its plugin interface:
+Wave CMS is a minimalistic open-source Content Management System based on AngularJS and PHP. It implements some default functionnalities: an administration interface to edit site settings, create pages and articles, manage users and 2 working plugins (contact form and social icons). As you might have guessed, this is not an achieved project but it can already be used and improved by developers thanks to its plugin interface:
 - You can use the JSON Database in your plugin.
 - You can use the AngularJS $wave service to make requests to the Database or the Plugins.
 - You can add Angular controllers, templates, routes, scripts, CSS to the admin and user interface directly using the PHP Object PU (Plugin Utilities).
